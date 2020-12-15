@@ -33,7 +33,7 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var newsF=NewsFetchr()
-        val earthquakeLiveData=newsF.fetchContents()
+        val earthquakeLiveData=newsF.oddPolticNews()
         earthquakeLiveData.observe(this, Observer {
             Log.d("test", "Response received: ${it}")
             newsRecyclerView.adapter = NewsAdapter(it)
