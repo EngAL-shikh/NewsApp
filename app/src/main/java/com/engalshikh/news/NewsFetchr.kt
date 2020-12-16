@@ -16,7 +16,7 @@ class NewsFetchr {
 
     init {
         val retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.1.2")
+                .baseUrl("http://192.168.1.4")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         newsApi = retrofit.create(NewsApi::class.java)

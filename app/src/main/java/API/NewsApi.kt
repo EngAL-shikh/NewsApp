@@ -14,5 +14,5 @@ interface NewsApi {
 
     @GET("/API/api/api_news.php?")
     fun fetchtype(@Query("type") type: Int): Call<NewsResponse>
-    //fun fetchtype(type:Int): Call<NewsResponse>
+
 }
