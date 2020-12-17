@@ -9,11 +9,13 @@ class NewsViewModel:ViewModel() {
     val polticnewsLiveData: LiveData<List<News>>
     val sportnewsLiveData: LiveData<List<News>>
    val oddnewsLiveData: LiveData<List<News>>
+   val catLiveData: LiveData<List<CatNews>>
     init {
         newsLiveData = NewsFetchr().fetchContents()
         polticnewsLiveData = NewsFetchr().fetchPolticNews()
         sportnewsLiveData = NewsFetchr().sportPolticNews()
         oddnewsLiveData = NewsFetchr().oddPolticNews()
+        catLiveData = NewsFetchr().fetchCat()
     }
 
 }

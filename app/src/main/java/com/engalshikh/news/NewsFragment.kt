@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -39,28 +38,29 @@ class NewsFragment : Fragment() {
 
     if (type=="gnral"){
 
-        val earthquakeLiveData=newsF.fetchContents()
-        earthquakeLiveData.observe(this, Observer {
+        val newsLiveData=newsF.fetchContents()
+        newsLiveData.observe(this, Observer {
             Log.d("test", "Response received: ${it}")
             newsRecyclerView.adapter = NewsAdapter(it)
         })
 
        newsRecyclerView2.visibility=View.VISIBLE
-        earthquakeLiveData.observe(this, Observer {
+        val catLiveData=newsF.fetchCat()
+        catLiveData.observe(this, Observer {
             Log.d("test", "Response received: ${it}")
-            newsRecyclerView2.adapter = NewsAdapter2(it)
+            newsRecyclerView2.adapter = CatAdapter(it)
         })
     }else if(type=="sport"){
 
-        val earthquakeLiveData=newsF.sportPolticNews()
-        earthquakeLiveData.observe(this, Observer {
+        val newsLiveData=newsF.sportPolticNews()
+        newsLiveData.observe(this, Observer {
             Log.d("test", "Response received: ${it}")
             newsRecyclerView.adapter = NewsAdapter(it)
     })
 
     }else{
-        val earthquakeLiveData=newsF.fetchPolticNews()
-        earthquakeLiveData.observe(this, Observer {
+        val newsLiveData=newsF.fetchPolticNews()
+        newsLiveData.observe(this, Observer {
             Log.d("test", "Response received: ${it}")
             newsRecyclerView.adapter = NewsAdapter(it)
         })
@@ -99,12 +99,16 @@ class NewsFragment : Fragment() {
         }
     }
 
+    
+    // News Holder 
     private  inner class NewsHolder(view: View) : RecyclerView.ViewHolder(view){
 
         val image=view.findViewById(R.id.image) as TextView
         val title=view.findViewById(R.id.title) as TextView
         val det=view.findViewById(R.id.det) as TextView
         val time=view.findViewById(R.id.time) as TextView
+
+
 
 
         var news=News()
@@ -117,45 +121,13 @@ class NewsFragment : Fragment() {
 
 
 
-    }}
-
-    inner class NewsAdapter(var news: List<News>) :
-            RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            var view: View
-
-
-
-            view = layoutInflater.inflate(
-                    R.layout.news_list,
-                    parent, false
-            )
-
-            return NewsHolder(view)
-
-        }
-
-
-        override fun getItemCount(): Int {
-
-            return news.size
-
-        }
-
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-            val news=news[position]
-            if(holder is NewsHolder)
-                holder.bind(news)
-
-
-        }
     }
+       
 
-
-
-
-    inner class NewsAdapter2(var news: List<News>) :
+    }
+    
+    // NewsAdapter
+    inner class NewsAdapter(var news: List<News>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             var view: View
@@ -163,7 +135,7 @@ class NewsFragment : Fragment() {
 
 
             view = layoutInflater.inflate(
-                R.layout.news_cat_list,
+                R.layout.news_list,
                 parent, false
             )
 
@@ -178,11 +150,71 @@ class NewsFragment : Fragment() {
 
         }
 
+
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
             val news=news[position]
             if(holder is NewsHolder)
                 holder.bind(news)
+
+
+        }
+    }
+    
+    
+    
+    
+    // Cat Holder 
+    private  inner class CatHolder(view: View) : RecyclerView.ViewHolder(view){
+
+
+        val cattitle=view.findViewById(R.id.cattitle) as TextView
+        val sub_cat_title=view.findViewById(R.id.sub_cat_title) as TextView
+        val sub2_cat_title=view.findViewById(R.id.sub2_cat_title) as TextView
+
+
+        var catnews=CatNews()
+        fun bind2(catnews: CatNews){
+
+
+            cattitle.text=catnews.cattitle
+            sub_cat_title.text=catnews.subsubtitle
+            sub2_cat_title.text=catnews.sub2title
+
+
+        }
+
+    }
+
+    //CatAdapter
+    inner class CatAdapter(var catnews: List<CatNews>) :
+        RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            var view: View
+
+
+
+            view = layoutInflater.inflate(
+                R.layout.news_cat_list,
+                parent, false
+            )
+
+            return CatHolder(view)
+
+        }
+
+
+        override fun getItemCount(): Int {
+
+            return catnews.size
+
+        }
+
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+            val cat=catnews[position]
+            if(holder is CatHolder)
+                holder.bind2(cat)
 
 
         }

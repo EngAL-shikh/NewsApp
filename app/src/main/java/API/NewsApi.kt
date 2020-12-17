@@ -1,5 +1,6 @@
 package API
 
+import com.engalshikh.news.CatResponse
 import com.engalshikh.news.News
 import com.engalshikh.news.NewsResponse
 import retrofit2.Call
@@ -14,5 +15,8 @@ interface NewsApi {
 
     @GET("/API/api/api_news.php?")
     fun fetchtype(@Query("type") type: Int): Call<NewsResponse>
+
+    @GET("/API/api/api_news.php?")
+    fun fetchcattype(@Query("cat") type: String): Call<CatResponse>
 
 }
