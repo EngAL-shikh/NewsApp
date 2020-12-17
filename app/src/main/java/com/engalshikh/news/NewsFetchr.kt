@@ -16,7 +16,7 @@ class NewsFetchr {
 
     init {
         val retrofit: Retrofit = Retrofit.Builder()
-                .baseUrl("http://192.168.1.4")
+                .baseUrl("http://192.168.1.2")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         newsApi = retrofit.create(NewsApi::class.java)
@@ -100,6 +100,28 @@ class NewsFetchr {
                 val newsResponse:NewsResponse? = response.body()
                 val news:List<News> = newsResponse?.newsT
                         ?: mutableListOf()
+                Log.d("TAG", "Response received")
+                responseLiveData.value = news
+                Log.d("onResponse", news.toString())
+            }
+        })
+        return responseLiveData
+
+    }
+
+    fun fetchCat():LiveData<List<CatNews>> {
+        val responseLiveData: MutableLiveData<List<CatNews>> = MutableLiveData()
+        val newsRequest: Call<CatResponse> = newsApi.fetchcattype("cat")
+        newsRequest.enqueue(object : Callback<CatResponse> {
+            override fun onFailure(call: Call<CatResponse>, t: Throwable) {
+                Log.e("TAG", "Failed to fetch cat", t)
+            }
+            override fun onResponse(call: Call<CatResponse>, response: Response<CatResponse>
+            ) {
+
+                val catResponse:CatResponse? = response.body()
+                val news:List<CatNews> = catResponse?.catR
+                    ?: mutableListOf()
                 Log.d("TAG", "Response received")
                 responseLiveData.value = news
                 Log.d("onResponse", news.toString())
