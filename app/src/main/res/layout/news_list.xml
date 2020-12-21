@@ -20,13 +20,14 @@
                 android:layout_height="match_parent">
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    app:cardCornerRadius="8dp"
-                    android:layout_margin="5dp"
+                    app:cardCornerRadius="6dp"
+                    android:elevation="6dp"
                     android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/image"
-                        android:background="@mipmap/ic_launcher"
+                        android:gravity="center"
+
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -42,6 +43,10 @@
                 android:layout_height="match_parent">
                 <TextView
                     android:id="@+id/title"
+                    android:gravity="left|center"
+                    android:padding="5dp"
+                    android:textStyle="bold"
+                    android:text="News"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1">
@@ -49,6 +54,10 @@
                 </TextView>
                 <TextView
                     android:id="@+id/det"
+                    android:gravity="left|center"
+                    android:padding="5dp"
+                    android:text="today kill some one in new yourk"
+                    android:textColor="#6C6363"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1">
@@ -56,6 +65,9 @@
                 </TextView>
                 <TextView
                     android:id="@id/time"
+                    android:gravity="left|bottom"
+                    android:padding="5dp"
+                    android:text="12/32/2020"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1">
