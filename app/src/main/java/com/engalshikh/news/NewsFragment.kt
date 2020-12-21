@@ -83,7 +83,7 @@ class NewsFragment : Fragment() {
 
         newsRecyclerView2=view.findViewById(R.id.recycler_view2)
         newsRecyclerView2.layoutManager=
-           GridLayoutManager(context,1,LinearLayoutManager.HORIZONTAL,true)
+           GridLayoutManager(context,1,LinearLayoutManager.HORIZONTAL,false)
 
         return view
     }
